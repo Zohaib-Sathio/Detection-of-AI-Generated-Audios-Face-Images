@@ -1,0 +1,31 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Detection</title>
+</head>
+<body>
+    <h1>AI-Generated Content Detection</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'detect_ai' %}">
+        {% csrf_token %}
+        <label for="file">Choose an image or audio file:</label><br>
+        <input type="file" id="file" name="file" accept="image/*,audio/*" required><br><br>
+        <button type="submit">Check if AI Generated</button>
+    </form>
+    <img src="../Chloe_in_her_40s_0TXhcMH.jpg" alt="Chloe in her 40s" style="max-width: 500px; max-height: 500px;">
+
+    {% if result %}
+        <h2>Selected File:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+
+    {% if image_url %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ image_url }}" alt="Uploaded Image { { image_url } }" style="max-width: 500px; max-height: 500px;" />
+    {% endif %}
+</body>
+</html>
+
